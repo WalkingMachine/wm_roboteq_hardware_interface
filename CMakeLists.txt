@@ -8,8 +8,10 @@ add_definitions(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
         combined_robot_hw
+        controller_manager
         hardware_interface
         roscpp
+        roboteq_msgs
         )
 
 ## System dependencies are found with CMake's conventions
@@ -31,7 +33,6 @@ catkin_package(
 include_directories(
         include
         ${catkin_INCLUDE_DIRS}
-        # ${Eigen_INCLUDE_DIRS}
 )
 
 
