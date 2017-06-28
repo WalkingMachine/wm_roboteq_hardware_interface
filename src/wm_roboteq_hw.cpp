@@ -35,8 +35,8 @@ namespace wm_roboteq_hardware_interface
     registerInterface(&joint_velocity_interface_);
 
     // advertise publisher
-    cmdPub_ = robot_hw_nh.advertise<roboteq_msgs::Command>( cmd_topic, 1 );
-    feedbackSub_ = robot_hw_nh.subscribe( feedback_topic, 1, &WMRoboteqHardwareInterface::feedbackCB, this );
+    cmdPub_ = root_nh.advertise<roboteq_msgs::Command>( cmd_topic, 1 );
+    feedbackSub_ = root_nh.subscribe( feedback_topic, 1, &WMRoboteqHardwareInterface::feedbackCB, this );
 
     return true;
   }
