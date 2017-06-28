@@ -2,14 +2,11 @@
 // Created by gortium on 03/05/17.
 //
 
-#include "wm_roboteq_hardware_interface/wm_roboteq_hardware_interface.h"
+#include "wm_roboteq_hardware_interface/wm_roboteq_hw.h"
 
 
-namespace wm_roboteq_hardware_interface {
-
-  hardware_interface::VelocityJointInterface WMRoboteqHardwareInterface::joint_velocity_interface_;
-  hardware_interface::JointStateInterface    WMRoboteqHardwareInterface::joint_state_interface_;
-
+namespace wm_roboteq_hardware_interface
+{
 // << ---- H I G H   L E V E L   I N T E R F A C E ---- >>
 
   bool WMRoboteqHardwareInterface::init(ros::NodeHandle &root_nh, ros::NodeHandle &robot_hw_nh)
@@ -19,7 +16,7 @@ namespace wm_roboteq_hardware_interface {
     // Get parameters
     std::vector<std::string> Joints;
     if (!robot_hw_nh.getParam("joints", Joints)) { return false; }
-    Name = Joints[0];
+    name_ = Joints[0];
     std::string cmd_topic;
     std::string feedback_topic;
     if (!robot_hw_nh.getParam("cmd_topic", cmd_topic)) { return false; }
@@ -32,8 +29,8 @@ namespace wm_roboteq_hardware_interface {
     eff_ = 0;
 
     // Register interfaces
-    joint_state_interface_.registerHandle(JointStateHandle(Name, &pos_, &vel_, &eff_));
-    joint_velocity_interface_.registerHandle(JointHandle(joint_state_interface_.getHandle(Name), &cmd_));
+    joint_state_interface_.registerHandle(JointStateHandle(name_, &pos_, &vel_, &eff_));
+    joint_velocity_interface_.registerHandle(JointHandle(joint_state_interface_.getHandle(name_), &cmd_));
     registerInterface(&joint_state_interface_);
     registerInterface(&joint_velocity_interface_);
 
@@ -62,8 +59,6 @@ namespace wm_roboteq_hardware_interface {
   {
     last_msg_ = msg;
   }
-
 }
-
 
 PLUGINLIB_EXPORT_CLASS( wm_roboteq_hardware_interface::WMRoboteqHardwareInterface, hardware_interface::RobotHW)

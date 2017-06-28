@@ -25,7 +25,7 @@ namespace wm_roboteq_hardware_interface
       void write(const ros::Time &time, const ros::Duration &period);
 
       // Interface variables
-      std::string Name;
+      std::string name_;
       double cmd_;
       double pos_;
       double vel_;
@@ -33,8 +33,8 @@ namespace wm_roboteq_hardware_interface
 
     private:
       // Variables
-      static hardware_interface::VelocityJointInterface joint_velocity_interface_;
-      static hardware_interface::JointStateInterface joint_state_interface_;
+      hardware_interface::VelocityJointInterface joint_velocity_interface_;
+      hardware_interface::JointStateInterface joint_state_interface_;
       ros::Publisher cmdPub_;
       ros::Subscriber feedbackSub_;
       roboteq_msgs::Feedback last_msg_;

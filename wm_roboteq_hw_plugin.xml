@@ -1,4 +1,4 @@
-<library>
+<library path="lib/libwm_roboteq_hardware_interface">
     <class name="wm_roboteq_hardware_interface/WMRoboteqHardwareInterface" type="wm_roboteq_hardware_interface::WMRoboteqHardwareInterface" base_class_type="hardware_interface::RobotHW">
         <description>
             Walking Machine roboteq hw.

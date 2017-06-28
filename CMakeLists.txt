@@ -7,11 +7,10 @@ add_definitions(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-        combined_robot_hw
-        controller_manager
         hardware_interface
-        roscpp
         roboteq_msgs
+        roscpp
+        pluginlib
         )
 
 ## System dependencies are found with CMake's conventions
@@ -22,7 +21,11 @@ find_package(cmake_modules REQUIRED)
 catkin_package(
         INCLUDE_DIRS include
         LIBRARIES ${PROJECT_NAME}
-        CATKIN_DEPENDS combined_robot_hw hardware_interface roscpp
+        CATKIN_DEPENDS
+        hardware_interface
+        roboteq_msgs
+        roscpp
+        pluginlib
 )
 
 
@@ -38,7 +41,7 @@ include_directories(
 
 
 add_library(${PROJECT_NAME}
-        src/wm_roboteq_hardware_interface.cpp
+        src/wm_roboteq_hw.cpp
         )
 
 add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
